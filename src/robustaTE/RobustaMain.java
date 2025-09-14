@@ -57,12 +57,8 @@ public final class RobustaMain extends JFrame implements ActionListener {
 	private JMenuItem menuitem_save;
 	private JMenuItem menuitem_saveAs;
 	private JMenuItem menuitem_quit;
-	//java.net.URL url = ClassLoader.getSystemResource("resources/256.png");
-
-
 
 	public RobustaMain() { 
-		//this.setIconImage(new ImageIcon(getClass().getResource("resources/256.png")).getImage());
 
 		// Set the look-and-feel 
 		// Tries to default to whatever the host system prefers
