@@ -78,10 +78,10 @@ public final class RobustaMain extends JFrame implements ActionListener {
 		final Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
 		final URL imageResource = RobustaMain.class.getClassLoader().getResource("256.png");
 		final Image image = defaultToolkit.getImage(imageResource);
-		final Taskbar taskbar = Taskbar.getTaskbar();
 
 		try {
 			//set icon for macOS dock
+			final Taskbar taskbar = Taskbar.getTaskbar(); // declaration required in try catch to prevent UnsupportedOperationException crash
 			taskbar.setIconImage(image);
 		} catch (final UnsupportedOperationException e) {
 			System.out.println("The current OS does not support: 'taskbar.setIconImage'");
