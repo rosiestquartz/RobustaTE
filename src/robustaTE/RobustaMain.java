@@ -1,5 +1,6 @@
 package robustaTE;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -16,7 +17,10 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.Taskbar;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -28,6 +32,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,8 +57,12 @@ public final class RobustaMain extends JFrame implements ActionListener {
 	private JMenuItem menuitem_save;
 	private JMenuItem menuitem_saveAs;
 	private JMenuItem menuitem_quit;
+	//java.net.URL url = ClassLoader.getSystemResource("resources/256.png");
+
+
 
 	public RobustaMain() { 
+		//this.setIconImage(new ImageIcon(getClass().getResource("resources/256.png")).getImage());
 
 		// Set the look-and-feel 
 		// Tries to default to whatever the host system prefers
@@ -66,6 +75,21 @@ public final class RobustaMain extends JFrame implements ActionListener {
 
 		frame = new JFrame("RobustaTE"); //create the window 
 
+		final Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
+		final URL imageResource = RobustaMain.class.getClassLoader().getResource("256.png");
+		final Image image = defaultToolkit.getImage(imageResource);
+		final Taskbar taskbar = Taskbar.getTaskbar();
+
+		try {
+			//set icon for macOS dock
+			taskbar.setIconImage(image);
+		} catch (final UnsupportedOperationException e) {
+			System.out.println("The current OS does not support: 'taskbar.setIconImage'");
+		} catch (final SecurityException e) {
+			System.out.println("There was a security exception for: 'taskbar.setIconImage'");
+		}
+
+		frame.setIconImage(image); 	//set app/window icon for anything that isn't macOS
 
 		// Build the menu bar
 		menu_main = new JMenuBar(); // creates the menu bar
@@ -126,12 +150,8 @@ public final class RobustaMain extends JFrame implements ActionListener {
 
 		frame.setJMenuBar(menu_main);
 		//JPanel panel = new JPanel();
-		//Create a scrollbar using JScrollPane and add panel into it's viewport
-		//Set vertical and horizontal scrollbar always show
 
-		// Set attributes of the app window
-
-		area = new JTextArea();
+		area = new JTextArea(); // creates the editor text area
 		area.setFont(new java.awt.Font("Monospaced", java.awt.Font.PLAIN, defaultFontSize)); // sets default font and font size when jtextarea created
 
 		area.addKeyListener(new KeyListener()
@@ -154,7 +174,7 @@ public final class RobustaMain extends JFrame implements ActionListener {
 					}
 				}
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent e) {
 				// Handle key released actions
@@ -163,9 +183,14 @@ public final class RobustaMain extends JFrame implements ActionListener {
 
 				);
 
+		//Create a scrollbar using JScrollPane and add panel into it's viewport
+		//Set vertical and horizontal scrollbar always show
+		
 		JScrollPane scrollBar= new JScrollPane(area,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollBar.setPreferredSize(new Dimension(300, 200));
 
+		// Set attributes of the app window
+		
 		//scrollBar.setBounds(5, 5, 100, 100);
 		//add(scrollBar, BorderLayout.CENTER);
 		//frame.add(area);
