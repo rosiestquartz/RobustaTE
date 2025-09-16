@@ -199,7 +199,7 @@ public final class RobustaMain extends JFrame implements ActionListener {
 		frame.addWindowListener(new WindowAdapter() { // listens for window close events from window controls
 			public void windowClosing(WindowEvent e) {
 				if (unsavedChanges == true) { // only shows dialog if unsavedChanges true
-					int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?\n" + "All unsaved changes will be lost!", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE); 
+					int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to close this editor window?\n" + "All unsaved changes will be lost!", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 					if (result == JOptionPane.YES_OPTION) {
 						frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // disposes of current frame, and closes program if last window disposed
 					} else { 
@@ -289,14 +289,14 @@ public final class RobustaMain extends JFrame implements ActionListener {
 				Component f = null;
 				JOptionPane.showMessageDialog(f,"Error.");
 			}
-		} else if (ae.equals("New")) {
+		} else if (ae.equals("New")) { // NEW OPTION
 			area.setText("");
-		} else if (ae.equals("Quit")) { 
+
+		} else if (ae.equals("Quit")) { // QUIT MENU OPTION
 			if (unsavedChanges == true) {
-				int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?\n" + "All unsaved changes will be lost!", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE); 
+				int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit RobustaTE?\n" + "All unsaved changes in ALL editor windows will be lost!", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (result == JOptionPane.YES_OPTION) {
-					frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-					frame.dispose(); // disposes of current frame, and closes program if last window disposed
+					System.exit(0); // disposes of current frame, and closes program if last window disposed
 				} else { 
 					// do nothing, window remains open if you select no
 				}
