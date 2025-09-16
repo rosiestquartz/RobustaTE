@@ -1,6 +1,8 @@
 ![RobustaTE banner image, showing the cafetiere logo and name of the project](https://github.com/rosiestquartz/RobustaTE/blob/main/src/robustaTE/resources/banner.png)
 
-RobustaTE is a basic graphical text editor written in Java, and using Java Swing for its UI. It's inspired by projects such as SciTE, Notepad++, Kate and Gedit.
+RobustaTE is a basic graphical text editor written in Java, using Java Swing for its UI. It's inspired by projects such as SciTE, Notepad++, Kate and Gedit.
+
+RobustaTE is intended to be cross-platform, with it currently tested on macOS, Linux and FreeBSD.
 
 This has mainly started as a project for me to revise/improve my aging Java knowledge, and learn more about building a UI in Swing.
 
